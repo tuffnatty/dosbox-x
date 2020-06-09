@@ -252,9 +252,10 @@ bool read_directory_firstw(dir_information* dirp, wchar_t* entry_name, wchar_t* 
 
 	// TODO: offer a config.h option to opt out of Windows widechar functions
 	wcsncpy(entry_name,dirp->search_data.w.cFileName,(MAX_PATH<CROSS_LEN)?MAX_PATH:CROSS_LEN);
-	if (dirp->search_data.w.cAlternateFileName[0] != 0 && is_filename_8by3w(dirp->search_data.w.cFileName))
+	if (dirp->search_data.w.cAlternateFileName[0] != 0 && is_filename_8by3w(dirp->search_data.w.cFileName)) {
 		wcsncpy(entry_sname,dirp->search_data.w.cFileName,13);
-	else
+		CharUpperBuffW(entry_sname, 12);
+	} else
 		wcsncpy(entry_sname,dirp->search_data.w.cAlternateFileName,13);
 
 	if (dirp->search_data.w.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) is_directory = true;
@@ -272,9 +273,10 @@ bool read_directory_nextw(dir_information* dirp, wchar_t* entry_name, wchar_t* e
 
     // TODO: offer a config.h option to opt out of Windows widechar functions
 	wcsncpy(entry_name,dirp->search_data.w.cFileName,(MAX_PATH<CROSS_LEN)?MAX_PATH:CROSS_LEN);
-	if (dirp->search_data.w.cAlternateFileName[0] != 0 && is_filename_8by3w(dirp->search_data.w.cFileName))
+	if (dirp->search_data.w.cAlternateFileName[0] != 0 && is_filename_8by3w(dirp->search_data.w.cFileName)) {
 		wcsncpy(entry_sname,dirp->search_data.w.cFileName,13);
-	else
+		CharUpperBuffW(entry_sname, 12);
+	} else
 		wcsncpy(entry_sname,dirp->search_data.w.cAlternateFileName,13);
 
 	if (dirp->search_data.w.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) is_directory = true;
